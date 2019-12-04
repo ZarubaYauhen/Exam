@@ -12,19 +12,17 @@ window.onload = function () {
 
 // Задание №2
 var array = [1, 2, [2, 5, 3, [32, 5], 3], 7, 4];
-function arrSum(arr) {
-		  var sum = 0;
-		  for (var i = 0; i < arr.length; i++) {
-			   if (typeof arr[i] == 'object'){
-			      sum += arrSum(arr[i]);
-			   }else if (Number(arr[i])){
-			      sum += arr[i];
-			   }
-		  }
-		  return sum;
-		}
-		console.log("Сумма - " + arrSum(array));
+function run(arr){
+  let level = 0;
+  const sumFun = (arr) => {
+    ++level;
+    return arr.reduce((sum, current) => sum + (Array.isArray(current) ? sumFun(current) : current), 0)
+  };
+  return `сумма = ${sumFun(arr)} , количество = ${level}`
+}
 
+console.log(run(array))
+		
 
 // Задание№3
 
